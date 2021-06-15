@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 
 @Component({
   selector: 'app-side-nav-bar',
@@ -7,9 +7,6 @@ import {ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild} from '
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SideNavBarComponent {
-  @Input() showFiller: boolean = false;
-  @ViewChild('drawer') drawer: ElementRef | undefined;
-
   constructor() {
   }
 }

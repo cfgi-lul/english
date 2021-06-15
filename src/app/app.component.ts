@@ -7,9 +7,4 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  showFiller: boolean = false;
-
-  toggleSideBar(): void{
-    this.showFiller = !this.showFiller;
-  }
 }

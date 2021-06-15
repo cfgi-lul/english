@@ -1,16 +1,25 @@
 <mat-drawer-container autosize class="example-container">
   <mat-toolbar>
-    <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <button (click)="drawer.toggle()" aria-label="Example icon-button with menu icon" class="example-icon"
+            mat-icon-button>
       <mat-icon>menu</mat-icon>
     </button>
     <span>Learn english)))</span>
     <span class="example-spacer"></span>
   </mat-toolbar>
   <mat-drawer #drawer class="example-sidenav" mode="over">
-    <p>Learn English!))</p>
+    <mat-list>
+      <mat-list-item>Task 1</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>Task 2</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>Task 3</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>Task 4</mat-list-item>
+    </mat-list>
   </mat-drawer>
 
-  <app-main-page></app-main-page>
+  <router-outlet></router-outlet>
 </mat-drawer-container>
 
 
