@@ -50,16 +50,15 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatTableModule} from "@angular/material/table";
 import {MatTabsModule} from "@angular/material/tabs";
 import { SideNavBarComponent } from './common-components/side-nav-bar/side-nav-bar.component';
-import { TopNavBarComponent } from './common-components/top-nav-bar/top-nav-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
     SideNavBarComponent,
-    TopNavBarComponent,
   ],
   imports: [
+    MatSidenavModule,
     MatButtonModule,
     MatDividerModule,
     MatIconModule,

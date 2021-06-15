@@ -1,8 +1,16 @@
 <mat-drawer-container autosize class="example-container">
-  <mat-drawer #drawer [(opened)]="showFiller" class="example-sidenav" mode="side">
+  <mat-toolbar>
+    <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Learn english)))</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+  <mat-drawer #drawer class="example-sidenav" mode="over">
     <p>Learn English!))</p>
   </mat-drawer>
 
-
   <app-main-page></app-main-page>
 </mat-drawer-container>
+
+
