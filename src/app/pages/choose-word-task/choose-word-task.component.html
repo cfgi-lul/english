@@ -1,1 +1,12 @@
-<p>choose-word-task works!</p>
+<div class="wrapper">
+  <div class="english-word-container {{currentWordState$ | async}}">
+    <span class="word">hello</span>
+  </div>
+
+  <div class="translations-word-container">
+    <ng-container *ngFor="let translation of wordTranslations; let i = index">
+      <button class="word-translation" (click)="chooseWord(translation)" [color]="randomColorizeButton()"
+              mat-raised-button><span class="translation">{{translation.translation}}</span></button>
+    </ng-container>
+  </div>
+</div>

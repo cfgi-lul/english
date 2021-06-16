@@ -7,9 +7,10 @@ import {TasksListComponent} from "./pages/tasks-list/tasks-list.component";
 
 const routes: Routes = [
   {path: '', component: MainPageComponent},
-  {path: '**', component: PageNotFoundComponentComponent},
-  {path: './tasks/choose-word', component: ChooseWordTaskComponent},
-  {path: './tasks', component: TasksListComponent}
+  {path: 'tasks/choose-word', component: ChooseWordTaskComponent},
+  {path: 'tasks', component: TasksListComponent},
+  {path: '404', component: PageNotFoundComponentComponent},
+  {path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({

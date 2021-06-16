@@ -6,16 +6,18 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {MainPageComponent} from './pages/main-page/main-page.component';
-import {MatDrawerContainer, MatSidenavModule} from "@angular/material/sidenav";
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatButtonModule} from "@angular/material/button";
-import {MatDividerModule} from "@angular/material/divider";
-import {MatIconModule} from "@angular/material/icon";
+import {MatDrawerContainer, MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
 import {SideNavBarComponent} from './common-components/side-nav-bar/side-nav-bar.component';
-import {MatListModule} from "@angular/material/list";
-import { PageNotFoundComponentComponent } from './pages/page-not-found-component/page-not-found-component.component';
-import { ChooseWordTaskComponent } from './pages/choose-word-task/choose-word-task.component';
-import { TasksListComponent } from './pages/tasks-list/tasks-list.component';
+import {MatListModule} from '@angular/material/list';
+import {PageNotFoundComponentComponent} from './pages/page-not-found-component/page-not-found-component.component';
+import {ChooseWordTaskComponent} from './pages/choose-word-task/choose-word-task.component';
+import {TasksListComponent} from './pages/tasks-list/tasks-list.component';
+import {Overlay} from "@angular/cdk/overlay";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -45,7 +47,7 @@ import { TasksListComponent } from './pages/tasks-list/tasks-list.component';
     MatListModule,
   ],
   exports: [],
-  providers: [MatDrawerContainer],
+  providers: [MatDrawerContainer, Overlay, MatSnackBar],
   bootstrap: [AppComponent]
 })
 export class AppModule {
