@@ -8,7 +8,8 @@
     "server": "ng build --prod && http-server -p 8080 -c-1 dist/english",
     "prodbuild": "ng build --prod",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "refresh-dictionary": "node DictionaryParser.js"
   },
   "private": true,
   "dependencies": {
