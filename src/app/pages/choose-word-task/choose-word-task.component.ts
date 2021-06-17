@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ThemePalette} from "@angular/material/core/common-behaviors/color";
 import {BehaviorSubject} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {Overlay} from "@angular/cdk/overlay";
+import {DictionaryInteractionService} from "../../services/dictionary-interaction.service";
 
 @Component({
   selector: 'app-choose-word-task',
@@ -19,7 +19,7 @@ export class ChooseWordTaskComponent implements OnInit {
     {translation: 'привет', isRight: true}
   ];
 
-  constructor(private _snackBar: MatSnackBar) {
+  constructor(private _snackBar: MatSnackBar, private dictionaryInteraction: DictionaryInteractionService) {
   }
 
   ngOnInit(): void {

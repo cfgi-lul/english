@@ -8,7 +8,8 @@
   "files": [
     "src/main.ts",
     "src/polyfills.ts",
-    "src/app/interfaces/wordTranslation.ts"
+    "src/app/interfaces/wordTranslation.ts",
+    "src/app/interfaces/word.ts"
   ],
   "include": [
     "src/**/*.d.ts"
