@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MemorySubject} from "../shared-classes/MemorySubject";
 import * as dictionaryFromFakeServer from "./../../../dictionary.json";
+import {map, takeUntil} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,10 @@ export class DictionaryInteractionService {
 
   get dictionary$(): MemorySubject<Word[]> {
     return this._dictionary$;
+  }
+
+  get dictionaryLength$(): Observable<number> {
+    return this._dictionary$.pipe(map(dict=>dict.length));
   }
 
   async actualizeDictionary(): Promise<boolean> {
