@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ThemePalette} from "@angular/material/core/common-behaviors/color";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DictionaryInteractionService} from "../../services/dictionary-interaction.service";
 
@@ -11,6 +11,7 @@ import {DictionaryInteractionService} from "../../services/dictionary-interactio
 })
 export class ChooseWordTaskComponent implements OnInit {
 
+  dictionary$: Observable<Word[]> = this.dictionaryInteraction.dictionary$;
   currentWordState$: BehaviorSubject<'warn' | 'approved' | 'unset'> = new BehaviorSubject<'warn' | 'approved' | 'unset'>('unset');
 
   wordTranslations: WordTranslation[] = [
@@ -23,6 +24,7 @@ export class ChooseWordTaskComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dictionaryInteraction.actualizeDictionary();
   }
 
   randomColorizeButton(): ThemePalette {
