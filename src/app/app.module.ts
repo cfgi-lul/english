@@ -18,6 +18,11 @@ import {ChooseWordTaskComponent} from './pages/choose-word-task/choose-word-task
 import {TasksListComponent} from './pages/tasks-list/tasks-list.component';
 import {Overlay} from "@angular/cdk/overlay";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatRadioModule} from "@angular/material/radio";
+import {FormsModule} from "@angular/forms";
+import {MatOptionModule} from "@angular/material/core";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -45,6 +50,11 @@ import {MatSnackBar} from "@angular/material/snack-bar";
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
+    FormsModule,
+    MatRadioModule,
+    MatOptionModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   exports: [],
   providers: [MatDrawerContainer, Overlay, MatSnackBar],

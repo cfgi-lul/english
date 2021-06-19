@@ -1,9 +1,9 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {ThemePalette} from "@angular/material/core/common-behaviors/color";
-import {BehaviorSubject, combineLatest, Observable, Subject} from "rxjs";
+import {BehaviorSubject, combineLatest, Observable, of, Subject} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DictionaryInteractionService} from "../../services/dictionary-interaction.service";
-import {map} from "rxjs/operators";
+import {map, takeUntil} from "rxjs/operators";
 import {Utils} from "../../shared-classes/Utils";
 
 @Component({
@@ -16,19 +16,19 @@ export class ChooseWordTaskComponent implements OnInit, OnDestroy {
   dictionary$: Observable<Word[]> = this.dictionaryInteraction.dictionary$;
   currentWordState$: BehaviorSubject<'warn' | 'approved' | 'unset'> = new BehaviorSubject<'warn' | 'approved' | 'unset'>('unset');
   words$: Observable<Word[]>;
-  randomWordsIndexes: Observable<number[]>;
-  getRandomNumbersInRange = Utils.getRandomNumbersInRange;
   rightWordIndex: number = -1;
+  difficultyLevel: number = 3;
+  levels = [
+    {numberOfWord: 3, levelName: 'easy'},
+    {numberOfWord: 5, levelName: 'medium'},
+    {numberOfWord: 7, levelName: 'hard'}
+  ];
   private componentDestroyed$ = new Subject();
 
   constructor(private _snackBar: MatSnackBar,
               private dictionaryInteraction: DictionaryInteractionService) {
     this.dictionaryInteraction.actualizeDictionary().catch(Utils.doNothing);
-
-    this.randomWordsIndexes = this.dictionaryInteraction.dictionaryLength$
-      .pipe(map(dictionaryLength => this.getRandomNumbersInRange(0, dictionaryLength, 3)));
-
-    this.words$ = this.getWordsByIndexes(this.randomWordsIndexes);
+    this.words$ = this.getRandomWords();
   }
 
   ngOnInit(): void {
@@ -49,19 +49,30 @@ export class ChooseWordTaskComponent implements OnInit, OnDestroy {
     if (translation.eng === untranslatedWord.eng) {
       this.currentWordState$.next('approved');
       this._snackBar.open('You are right!!')._dismissAfter(1000);
+      setTimeout(() => {
+        this.nextWordToTranslate();
+        this.currentWordState$.next('unset');
+      }, 1500)
     } else {
       this.currentWordState$.next('warn');
       this._snackBar.open('You are FOOL(((')._dismissAfter(1000);
     }
   }
 
-  getWordsByIndexes(indexes: Observable<number[]>): Observable<Word[]> {
-    return combineLatest([indexes, this.dictionary$])
+  getRandomWords(): Observable<Word[]> {
+    let randomWordsIndexes = this.dictionaryInteraction.dictionaryLength$
+      .pipe(map(dictionaryLength => Utils.getRandomNumbersInRange(0, dictionaryLength, this.difficultyLevel)));
+
+    return combineLatest([randomWordsIndexes, this.dictionary$])
       .pipe(
         map(([indexes, dictionary]) => {
-          this.rightWordIndex = this.getRandomNumbersInRange(0, 2, 1)[0];
+          this.rightWordIndex = Utils.getRandomNumbersInRange(0, this.difficultyLevel - 1, 1)[0];
           return indexes.reduce((acc: Word[], cur: number) => [...acc, dictionary[cur]], []);
         }));
+  }
+
+  nextWordToTranslate() {
+    this.words$ = this.getRandomWords();
   }
 
   ngOnDestroy(): void {
