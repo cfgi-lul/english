@@ -1,0 +1,14 @@
+:host {
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  .title{
+    font-size: 5vw;
+
+  }
+  .logo{
+    width: 92vw;
+    max-height: 400px;
+    object-fit: cover;
+  }
+}

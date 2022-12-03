@@ -1,0 +1,27 @@
+<div class="wrapper">
+  <mat-form-field appearance="fill" class="settings-button-container">
+    <mat-label>Difficulty level</mat-label>
+    <mat-select (selectionChange)="nextWordToTranslate()" [(ngModel)]="difficultyLevel">
+      <mat-option *ngFor="let level of levels" [value]="level.numberOfWord">
+        {{level.levelName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <ng-container *ngIf="(words$ | async) as words">
+    <ng-container *ngIf="words[rightWordIndex] as underTranslatedWord">
+      <div class="english-word-container {{currentWordState$ | async}}">
+        <span class="word">{{underTranslatedWord.eng}}</span>
+      </div>
+
+
+      <div class="translations-word-container">
+        <ng-container *ngFor="let word of words; let i = index">
+          <button (click)="chooseWord(underTranslatedWord, word)" [disabled]="(currentWordState$ | async) === 'approved'"
+                  class="word-translation"
+                  mat-raised-button><span class="translation">{{word.rus}}</span></button>
+        </ng-container>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

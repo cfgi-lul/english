@@ -1,0 +1,67 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .settings-button-container {
+    align-self: flex-end;
+    top: 0;
+    right: 0;
+  }
+
+  .difficulty-level-wrapper {
+    max-width: 400px;
+
+    .difficulty-level-container {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .english-word-container {
+    border-radius: 200px;
+    border: white 25px solid;
+    width: min-content;
+
+    &.unset {
+      background-color: aqua;
+    }
+
+    &.warn {
+      background-color: red;
+    }
+
+    &.approved {
+      background-color: limegreen;
+    }
+
+    .word {
+      margin: 70px;
+      font-size: 200px;
+      color: black;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+  }
+
+  .translations-word-container {
+    margin-top: 200px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px;
+    width: 100%;
+
+    .word-translation {
+      min-width: 200px;
+      min-height: 60px;
+
+      .translation {
+        font-size: 30px;
+        margin: 5px;
+      }
+    }
+  }
+}
