@@ -1,10 +1,10 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
-import {ThemePalette} from "@angular/material/core/common-behaviors/color";
-import {BehaviorSubject, combineLatest, Observable, of, Subject} from "rxjs";
+import {BehaviorSubject, combineLatest, Observable, Subject} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DictionaryInteractionService} from "../../services/dictionary-interaction.service";
-import {map, takeUntil} from "rxjs/operators";
+import {map} from "rxjs/operators";
 import {Utils} from "../../shared-classes/Utils";
+import {ThemePalette} from "@angular/material/core";
 
 @Component({
   selector: 'app-choose-word-task',
