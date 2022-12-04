@@ -3,7 +3,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MemorySubject} from "../shared-classes/MemorySubject";
 import * as dictionaryFromFakeServer from "./../../../dictionary.json";
-import {map, takeUntil} from "rxjs/operators";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +31,7 @@ export class DictionaryInteractionService {
       this._dictionary$.next(dictionaryFromFakeServer);
       this._dictionaryActualizing$.next(false);
       return true;
-    } catch (err) {
+    } catch (err: any) {
       this._dictionaryActualizing$.next(false);
       this._snackBar.open(err)._dismissAfter(1000);
       return false;

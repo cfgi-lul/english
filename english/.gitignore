@@ -1,3 +1,5 @@
+/.angular/cache
+.angular
 # Outputs
 bazel-*
 test-project-host-*
