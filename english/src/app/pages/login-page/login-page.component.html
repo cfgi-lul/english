@@ -1,0 +1,77 @@
+<div class="wrapper">
+
+
+  <form [formGroup]="form" class="form" (ngSubmit)="submitForm(form.value)">
+    <div class="form-title">Login form</div>
+    <mat-form-field class="username">
+      <mat-label>username</mat-label>
+      <input [errorStateMatcher]="matcher"
+             [formControlName]="'username'"
+             matInput
+             placeholder="username"
+             type="text">
+      <mat-error *ngIf="form.get('username')?.hasError('required')">
+        username is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="first-name">
+      <mat-label>First name</mat-label>
+      <input [errorStateMatcher]="matcher"
+             [formControlName]="'firstName'"
+             matInput
+             placeholder="First name"
+             type="text">
+      <mat-error *ngIf="form.get('firstName')?.hasError('required')">
+        First name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="last-name">
+      <mat-label>Last name</mat-label>
+      <input [errorStateMatcher]="matcher"
+             [formControlName]="'lastName'"
+             matInput
+             placeholder="Last name"
+             type="text">
+      <mat-error *ngIf="form.get('lastName')?.hasError('required')">
+        Last name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="email">
+      <mat-label>email</mat-label>
+      <input [errorStateMatcher]="matcher"
+             [formControlName]="'email'"
+             matInput
+             placeholder="email"
+             type="email">
+      <mat-error *ngIf="form.get('email')?.hasError('required')">
+        email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="password">
+      <mat-label>password</mat-label>
+      <input [errorStateMatcher]="matcher"
+             [formControlName]="'password'"
+             [type]="(passwordVisibility | async) ? 'text' : 'password'"
+             matInput
+             placeholder="password">
+      <mat-error *ngIf="form.get('password')?.hasError('required')">
+        password is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="form.get('password')?.getError('passwordStrength') as errors">
+        {{errors}}
+      </mat-error>
+      <button (click)="changeVisibility($event)" mat-icon-button matSuffix>
+        <mat-icon>{{(passwordVisibility | async) ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <div class="action-buttons-wrapper">
+      <button mat-stroked-button (click)="clear($event)">Clear</button>
+      <button color="primary" type="submit" mat-raised-button>Login</button>
+    </div>
+  </form>
+</div>

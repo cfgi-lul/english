@@ -19,10 +19,13 @@ import {TasksListComponent} from './pages/tasks-list/tasks-list.component';
 import {Overlay} from "@angular/cdk/overlay";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatRadioModule} from "@angular/material/radio";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatOptionModule} from "@angular/material/core";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
@@ -32,6 +35,8 @@ import {MatSelectModule} from "@angular/material/select";
     PageNotFoundComponentComponent,
     ChooseWordTaskComponent,
     TasksListComponent,
+    LoginPageComponent,
+    RegistrationPageComponent,
   ],
   imports: [
     MatSidenavModule,
@@ -54,7 +59,9 @@ import {MatSelectModule} from "@angular/material/select";
     MatRadioModule,
     MatOptionModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatInputModule,
+    ReactiveFormsModule
   ],
   exports: [],
   providers: [MatDrawerContainer, Overlay, MatSnackBar],
