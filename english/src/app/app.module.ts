@@ -14,7 +14,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {SideNavBarComponent} from './common-components/side-nav-bar/side-nav-bar.component';
 import {MatListModule} from '@angular/material/list';
 import {PageNotFoundComponentComponent} from './pages/page-not-found-component/page-not-found-component.component';
-import {ChooseWordTaskComponent} from './pages/choose-word-task/choose-word-task.component';
+import {ChooseWordTaskComponent} from './pages/tasks/choose-word-task/choose-word-task.component';
 import {TasksListComponent} from './pages/tasks-list/tasks-list.component';
 import {Overlay} from "@angular/cdk/overlay";
 import {MatSnackBar} from "@angular/material/snack-bar";
