@@ -1,9 +1,8 @@
 package com.maven.translationserverapp.model;
 
-import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "dictionaries")
