@@ -1,24 +1,25 @@
 package com.maven.translationserverapp.rest;
 
 import com.maven.translationserverapp.dto.AuthenticationRequestDTO;
+import com.maven.translationserverapp.dto.UserDTO;
 import com.maven.translationserverapp.model.User;
 import com.maven.translationserverapp.security.jwt.JWTTokenProvider;
 import com.maven.translationserverapp.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/api/v1/auth/")
 public class AuthenticationRESTController {
@@ -29,8 +30,7 @@ public class AuthenticationRESTController {
     private final UserService userService;
 
     @Autowired
-    public AuthenticationRESTController(AuthenticationManager authenticationManager,
-                                        JWTTokenProvider jwtTokenProvider,
+    public AuthenticationRESTController(AuthenticationManager authenticationManager, JWTTokenProvider jwtTokenProvider,
                                         UserService userService) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
@@ -57,7 +57,30 @@ public class AuthenticationRESTController {
 
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e) {
-            throw new BadCredentialsException("Invalid username or password");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid password or username");
+        }
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ResponseEntity<?> saveUser(@RequestBody UserDTO userDTO) {
+        try {
+            User userDB = this.userService.findByUsername(userDTO.getUsername());
+            if (userDB != null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                                                  "User with username: " + userDTO.getUsername() + " already exist"
+                );
+            }
+            User user = new User();
+            user.setEmail(userDTO.getEmail());
+            user.setPassword(userDTO.getPassword());
+            user.setLastName(userDTO.getLastName());
+            user.setUsername(userDTO.getUsername());
+            user.setFirstName(userDTO.getFirstName());
+            return ResponseEntity.ok(this.userService.register(user));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                                              "User with username: " + userDTO.getUsername() + " already exist"
+            );
         }
     }
 }

@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService {
     public User register(User user) {
         List<UserDictionary> userDictionaries = new ArrayList<>();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setDictionaries(userDictionaries);
         User registeredUser = userRepository.save(user);
         log.info("IN register - user: {} successfully registered", registeredUser);
 
@@ -37,9 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        User result = userRepository.findByUsername(username);
-        log.info("IN findByUserna me - user: {} found by username: {}", result, username);
-        return result;
+        return userRepository.findByUsername(username);
     }
 
     @Override
