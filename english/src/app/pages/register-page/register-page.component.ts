@@ -19,12 +19,12 @@ export interface ILoginForm {
 }
 
 @Component({
-  selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss'],
+  selector: 'app-register-page',
+  templateUrl: './register-page.component.html',
+  styleUrls: ['./register-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginPageComponent {
+export class RegisterPageComponent {
   passwordVisibility = new BehaviorSubject(false);
   form: FormGroup;
   matcher = new ErrorStateMatcher();

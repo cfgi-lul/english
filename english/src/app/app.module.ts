@@ -15,7 +15,6 @@ import {SideNavBarComponent} from './common-components/side-nav-bar/side-nav-bar
 import {MatListModule} from '@angular/material/list';
 import {PageNotFoundComponentComponent} from './pages/page-not-found-component/page-not-found-component.component';
 import {ChooseWordTaskComponent} from './pages/tasks/choose-word-task/choose-word-task.component';
-import {TasksListComponent} from './pages/tasks-list/tasks-list.component';
 import {Overlay} from "@angular/cdk/overlay";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatRadioModule} from "@angular/material/radio";
@@ -23,9 +22,11 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatOptionModule} from "@angular/material/core";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
-import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
+import {RegisterPageComponent} from './pages/register-page/register-page.component';
+import {RegistrationPageComponent} from './pages/registration-page/registration-page.component';
 import {MatInputModule} from "@angular/material/input";
+import {TaskListModule} from "./pages/tasks-list/task-list/task-list.module";
+import {TaskListRoutingModule} from "./pages/tasks-list/task-list/task-list-routing.module";
 
 @NgModule({
   declarations: [
@@ -34,8 +35,7 @@ import {MatInputModule} from "@angular/material/input";
     SideNavBarComponent,
     PageNotFoundComponentComponent,
     ChooseWordTaskComponent,
-    TasksListComponent,
-    LoginPageComponent,
+    RegisterPageComponent,
     RegistrationPageComponent,
   ],
   imports: [
@@ -61,7 +61,9 @@ import {MatInputModule} from "@angular/material/input";
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TaskListModule,
+    TaskListRoutingModule
   ],
   exports: [],
   providers: [MatDrawerContainer, Overlay, MatSnackBar],
