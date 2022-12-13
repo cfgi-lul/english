@@ -1,13 +1,19 @@
 <mat-drawer-container autosize class="example-container">
-  <mat-toolbar>
-    <button (click)="drawer.toggle()" aria-label="Example icon-button with menu icon" class="example-icon"
-            mat-icon-button>
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span>Learn english)))</span>
-    <span class="example-spacer"></span>
+  <mat-toolbar class="header">
+    <div class="logo-wrapper">
+      <button (click)="drawer.toggle()" class="side-bar-icon"
+              mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div>Learn english)))</div>
+    </div>
+
+    <div class="auth-buttons-wrapper">
+      <button color="primary" [routerLink]="['login']" mat-button>Sign in</button>
+      <button color="primary" [routerLink]="['register']" mat-button>Sign up</button>
+    </div>
   </mat-toolbar>
-  <mat-drawer #drawer class="example-sidenav" mode="over">
+  <mat-drawer #drawer mode="over">
     <mat-list>
       <mat-list-item>
         <a (click)="drawer.toggle()" mat-raised-button routerLink="">Home page</a>
@@ -15,14 +21,6 @@
 
       <mat-list-item>
         <a (click)="drawer.toggle()" mat-raised-button routerLink="../tasks/choose-word">Сhoose word training</a>
-      </mat-list-item>
-
-      <mat-list-item>
-        <a (click)="drawer.toggle()" mat-raised-button routerLink="tasks/choose-word">Сhoose word training</a>
-      </mat-list-item>
-
-      <mat-list-item>
-        <a (click)="drawer.toggle()" mat-raised-button routerLink="tasks/choose-word">Сhoose word training</a>
       </mat-list-item>
     </mat-list>
   </mat-drawer>

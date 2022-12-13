@@ -21,7 +21,7 @@
 
   .english-word-container {
     border-radius: 200px;
-    border: white 25px solid;
+    border: white 1.5vw solid;
     width: min-content;
 
     &.unset {
@@ -38,7 +38,7 @@
 
     .word {
       margin: 70px;
-      font-size: 200px;
+      font-size: 10vw;
       color: black;
       text-transform: uppercase;
       white-space: nowrap;

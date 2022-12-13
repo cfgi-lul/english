@@ -1,9 +1,9 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {BehaviorSubject, combineLatest, Observable, Subject} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {DictionaryInteractionService} from "../../../services/dictionary-interaction.service";
+import {DictionaryInteractionService} from "../../../../services/dictionary-interaction.service";
 import {map} from "rxjs/operators";
-import {Utils} from "../../../shared-classes/Utils";
+import {Utils} from "../../../../shared-classes/Utils";
 import {ThemePalette} from "@angular/material/core";
 
 @Component({

@@ -3,15 +3,16 @@ import {RouterModule, Routes} from '@angular/router';
 import {MainPageComponent} from "./pages/main-page/main-page.component";
 import {PageNotFoundComponentComponent} from "./pages/page-not-found-component/page-not-found-component.component";
 import {RegisterPageComponent} from "./pages/register-page/register-page.component";
+import {LoginPageComponent} from "./pages/login-page/login-page.component";
 
 const routes: Routes = [
   {path: '', component: MainPageComponent},
   {path: 'register', component: RegisterPageComponent},
-  {path: 'login', component: RegisterPageComponent},
+  {path: 'login', component: LoginPageComponent},
   {path: '404', component: PageNotFoundComponentComponent},
   {
     path: 'tasks',
-    loadChildren: () => import('./pages/tasks-list/task-list/task-list-routing.module').then(m => m.TaskListRoutingModule)
+    loadChildren: () => import('./pages/tasks-list/task-list-routing.module').then(m => m.TaskListRoutingModule)
   },
   {path: '**', redirectTo: '/404'},
 

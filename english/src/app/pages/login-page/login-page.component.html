@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <form (ngSubmit)="submitForm(form.value)" [formGroup]="form" class="form">
+    <div class="form-title">Login form</div>
+    <mat-form-field class="username">
+      <mat-label>username</mat-label>
+      <input [formControlName]="'username'"
+             matInput
+             placeholder="username"
+             type="text">
+      <mat-error *ngIf="form.get('username')?.hasError('required')">
+        username is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="password">
+      <mat-label>password</mat-label>
+      <input [formControlName]="'password'"
+             [type]="(passwordVisibility | async) ? 'text' : 'password'"
+             matInput
+             placeholder="password">
+      <button (click)="changeVisibility($event)" mat-icon-button matSuffix>
+        <mat-icon>{{(passwordVisibility | async) ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <div class="action-buttons-wrapper">
+      <button color="primary" mat-raised-button type="submit">Login</button>
+    </div>
+  </form>
+</div>

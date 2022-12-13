@@ -14,7 +14,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {SideNavBarComponent} from './common-components/side-nav-bar/side-nav-bar.component';
 import {MatListModule} from '@angular/material/list';
 import {PageNotFoundComponentComponent} from './pages/page-not-found-component/page-not-found-component.component';
-import {ChooseWordTaskComponent} from './pages/tasks/choose-word-task/choose-word-task.component';
 import {Overlay} from "@angular/cdk/overlay";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatRadioModule} from "@angular/material/radio";
@@ -23,10 +22,11 @@ import {MatOptionModule} from "@angular/material/core";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {RegisterPageComponent} from './pages/register-page/register-page.component';
-import {RegistrationPageComponent} from './pages/registration-page/registration-page.component';
 import {MatInputModule} from "@angular/material/input";
-import {TaskListModule} from "./pages/tasks-list/task-list/task-list.module";
-import {TaskListRoutingModule} from "./pages/tasks-list/task-list/task-list-routing.module";
+import {TaskListModule} from "./pages/tasks-list/task-list.module";
+import {TaskListRoutingModule} from "./pages/tasks-list/task-list-routing.module";
+import {LoginPageComponent} from './pages/login-page/login-page.component';
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -34,9 +34,8 @@ import {TaskListRoutingModule} from "./pages/tasks-list/task-list/task-list-rout
     MainPageComponent,
     SideNavBarComponent,
     PageNotFoundComponentComponent,
-    ChooseWordTaskComponent,
     RegisterPageComponent,
-    RegistrationPageComponent,
+    LoginPageComponent,
   ],
   imports: [
     MatSidenavModule,
@@ -65,7 +64,14 @@ import {TaskListRoutingModule} from "./pages/tasks-list/task-list/task-list-rout
     TaskListModule,
     TaskListRoutingModule
   ],
-  exports: [],
+  exports: [
+    CommonModule,
+    TaskListRoutingModule,
+    MatInputModule,
+    MatSelectModule,
+    FormsModule,
+    MatButtonModule,
+  ],
   providers: [MatDrawerContainer, Overlay, MatSnackBar],
   bootstrap: [AppComponent]
 })

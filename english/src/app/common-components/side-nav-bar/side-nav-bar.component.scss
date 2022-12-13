@@ -1,3 +1,20 @@
-.example-container{
+.example-container {
   height: 100vh;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .auth-buttons-wrapper {
+    display: flex;
+    gap: 16px;
+  }
 }
