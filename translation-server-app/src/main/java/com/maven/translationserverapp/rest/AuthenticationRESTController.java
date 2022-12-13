@@ -38,7 +38,7 @@ public class AuthenticationRESTController {
     }
 
     @PostMapping("login")
-    public ResponseEntity login(@RequestBody AuthenticationRequestDTO requestDto) {
+    public ResponseEntity<?> login(@RequestBody AuthenticationRequestDTO requestDto) {
         try {
             String username = requestDto.getUsername();
             authenticationManager.authenticate(
@@ -64,11 +64,9 @@ public class AuthenticationRESTController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<?> saveUser(@RequestBody UserDTO userDTO) {
         try {
-            User userDB = this.userService.findByUsername(userDTO.getUsername());
-            if (userDB != null) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                                                  "User with username: " + userDTO.getUsername() + " already exist"
-                );
+            if (this.userService.findByUsername(userDTO.getUsername()) != null || this.userService.findByEmail(
+                    userDTO.getEmail()) != null) {
+                throw new Exception();
             }
             User user = new User();
             user.setEmail(userDTO.getEmail());
@@ -79,7 +77,7 @@ public class AuthenticationRESTController {
             return ResponseEntity.ok(this.userService.register(user));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                                              "User with username: " + userDTO.getUsername() + " already exist"
+                                              "User with this username or email already exist"
             );
         }
     }
