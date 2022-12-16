@@ -1,4 +1,4 @@
-﻿interface WordTranslation{
+﻿export interface WordTranslation{
   translation: string,
   isRight: boolean
 }

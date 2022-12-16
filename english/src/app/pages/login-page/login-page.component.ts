@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {BehaviorSubject} from "rxjs";
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
   selector: 'app-login-page',
@@ -12,15 +13,20 @@ export class LoginPageComponent {
   form: FormGroup;
   passwordVisibility = new BehaviorSubject(false);
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private auth: AuthService) {
     this.form = this.fb.group({
       username: '',
       password: '',
     })
   }
 
-  submitForm(value: any) {
-
+  async submitForm(value: any) {
+    try {
+      await this.auth.login(value).toPromise();
+    }catch (e) {
+      console.error(e);
+    }
   }
   changeVisibility($event: MouseEvent) {
     $event.preventDefault();

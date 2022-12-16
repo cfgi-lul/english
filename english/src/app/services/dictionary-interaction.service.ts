@@ -4,6 +4,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {MemorySubject} from "../shared-classes/MemorySubject";
 import * as dictionaryFromFakeServer from "./../../../dictionary.json";
 import {map} from "rxjs/operators";
+import {Word} from "../interfaces/word";
 
 @Injectable({
   providedIn: 'root'

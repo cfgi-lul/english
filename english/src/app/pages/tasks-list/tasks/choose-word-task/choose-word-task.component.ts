@@ -5,6 +5,7 @@ import {DictionaryInteractionService} from "../../../../services/dictionary-inte
 import {map} from "rxjs/operators";
 import {Utils} from "../../../../shared-classes/Utils";
 import {ThemePalette} from "@angular/material/core";
+import {Word} from "../../../../interfaces/word";
 
 @Component({
   selector: 'app-choose-word-task',

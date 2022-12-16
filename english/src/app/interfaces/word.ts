@@ -1,4 +1,4 @@
-﻿interface Word {
+﻿export interface Word {
   rus: string,
   eng: string,
   isLearnedRating: number,

@@ -27,6 +27,7 @@ import {TaskListModule} from "./pages/tasks-list/task-list.module";
 import {TaskListRoutingModule} from "./pages/tasks-list/task-list-routing.module";
 import {LoginPageComponent} from './pages/login-page/login-page.component';
 import {CommonModule} from "@angular/common";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import {CommonModule} from "@angular/common";
     MatSelectModule,
     FormsModule,
     MatButtonModule,
+    HttpClientModule
   ],
   providers: [MatDrawerContainer, Overlay, MatSnackBar],
   bootstrap: [AppComponent]
