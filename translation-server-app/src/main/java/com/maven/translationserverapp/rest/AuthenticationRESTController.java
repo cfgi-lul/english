@@ -19,6 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.HashMap;
 import java.util.Map;
 
+@CrossOrigin("http://localhost:10050")
 @Slf4j
 @RestController
 @RequestMapping(value = "/api/v1/auth/")
@@ -74,7 +75,8 @@ public class AuthenticationRESTController {
             user.setLastName(userDTO.getLastName());
             user.setUsername(userDTO.getUsername());
             user.setFirstName(userDTO.getFirstName());
-            return ResponseEntity.ok(this.userService.register(user));
+            this.userService.register(user);
+            return ResponseEntity.ok(200);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                                               "User with this username or email already exist"
