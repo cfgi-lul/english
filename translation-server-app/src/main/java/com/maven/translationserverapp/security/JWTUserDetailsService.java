@@ -3,7 +3,7 @@ package com.maven.translationserverapp.security;
 import com.maven.translationserverapp.model.User;
 import com.maven.translationserverapp.security.jwt.JWTUser;
 import com.maven.translationserverapp.security.jwt.JWTUserFactory;
-import com.maven.translationserverapp.service.UserService;
+import com.maven.translationserverapp.service.interfaces.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

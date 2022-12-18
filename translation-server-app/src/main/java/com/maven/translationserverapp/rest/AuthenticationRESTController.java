@@ -4,7 +4,7 @@ import com.maven.translationserverapp.dto.AuthenticationRequestDTO;
 import com.maven.translationserverapp.dto.UserDTO;
 import com.maven.translationserverapp.model.User;
 import com.maven.translationserverapp.security.jwt.JWTTokenProvider;
-import com.maven.translationserverapp.service.UserService;
+import com.maven.translationserverapp.service.interfaces.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ import java.util.Map;
 @CrossOrigin("http://localhost:10050")
 @Slf4j
 @RestController
-@RequestMapping(value = "/api/v1/auth/")
+@RequestMapping(value = "/api/auth/")
 public class AuthenticationRESTController {
     private final AuthenticationManager authenticationManager;
 
@@ -62,7 +62,7 @@ public class AuthenticationRESTController {
         }
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "register", method = RequestMethod.POST)
     public ResponseEntity<?> saveUser(@RequestBody UserDTO userDTO) {
         try {
             if (this.userService.findByUsername(userDTO.getUsername()) != null || this.userService.findByEmail(

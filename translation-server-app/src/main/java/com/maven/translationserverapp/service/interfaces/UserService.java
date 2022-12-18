@@ -1,4 +1,4 @@
-package com.maven.translationserverapp.service;
+package com.maven.translationserverapp.service.interfaces;
 
 import com.maven.translationserverapp.model.User;
 

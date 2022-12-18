@@ -14,8 +14,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private final JWTTokenProvider jwtTokenProvider;
 
-    private static final String LOGIN_ENDPOINT = "/api/v1/auth/login";
-    private static final String REGISTER_ENDPOINT = "/api/v1/auth/register";
+    private static final String LOGIN_ENDPOINT = "/api/auth/login";
+    private static final String REGISTER_ENDPOINT = "/api/auth/register";
+    private static final String DICTIONARY_ENDPOINT = "/api/v1/auth/dictionary/**";
 
     @Autowired
     public SecurityConfig(JWTTokenProvider jwtTokenProvider) {
@@ -37,6 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
                 .authorizeRequests()
                 .antMatchers(LOGIN_ENDPOINT, REGISTER_ENDPOINT).permitAll()
+                .antMatchers(DICTIONARY_ENDPOINT).hasAnyRole()
                 .anyRequest().authenticated()
                 .and()
                 .apply(new JWTConfigurer(jwtTokenProvider));

@@ -4,6 +4,7 @@ import com.maven.translationserverapp.model.User;
 import com.maven.translationserverapp.model.UserDictionary;
 import com.maven.translationserverapp.repository.UserDictionaryRepository;
 import com.maven.translationserverapp.repository.UserRepository;
+import com.maven.translationserverapp.service.interfaces.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
