@@ -68,21 +68,6 @@
         </createTable>
     </changeSet>
 
-<!--    <changeSet id="1.0.2" author="cfgi">-->
-<!--        <preConditions onFail="MARK_RAN" onError="MARK_RAN">-->
-<!--            <not>-->
-<!--                <tableExists tableName="user_dictionaries"/>-->
-<!--            </not>-->
-<!--        </preConditions>-->
-<!--        <createTable tableName="user_dictionaries">-->
-<!--            <column name="user_id" type="BIGINT">-->
-<!--            </column>-->
-
-<!--            <column name="dictionary_id" type="BIGINT">-->
-<!--            </column>-->
-<!--        </createTable>-->
-<!--    </changeSet>-->
-
     <changeSet id="1.0.2" author="cfgi">
         <preConditions onFail="MARK_RAN" onError="MARK_RAN">
             <foreignKeyConstraintExists/>
@@ -96,16 +81,4 @@
                                  referencedTableName="users"/>
     </changeSet>
 
-<!--    <changeSet id="1.0.4" author="cfgi">-->
-<!--        <preConditions onFail="MARK_RAN" onError="MARK_RAN">-->
-<!--            <foreignKeyConstraintExists/>-->
-<!--        </preConditions>-->
-<!--        <addForeignKeyConstraint baseColumnNames="dictionaries_id"-->
-<!--                                 baseTableName="user_dictionaries"-->
-<!--                                 constraintName="fk_user_dictionaries_dictionaries"-->
-<!--                                 onDelete="CASCADE"-->
-<!--                                 onUpdate="RESTRICT"-->
-<!--                                 referencedColumnNames="id"-->
-<!--                                 referencedTableName="dictionaries"/>-->
-<!--    </changeSet>-->
 </databaseChangeLog>

@@ -4,5 +4,5 @@ import com.maven.translationserverapp.model.UserDictionary;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserDictionaryRepository extends JpaRepository<UserDictionary, Long> {
-    UserDictionary findById(String id);
+//    UserDictionary findById(Long id);
 }

@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -31,7 +32,8 @@ public class TranslationServiceImpl implements TranslationService {
     }
 
     @Override
-    public UserDictionary deleteWordById(String id) {
+    public UserDictionary deleteWordById(Long id) {
+        this.userDictionaryRepository.deleteById(id);
         return null;
     }
 
@@ -46,7 +48,7 @@ public class TranslationServiceImpl implements TranslationService {
     }
 
     @Override
-    public UserDictionary getWordById(UserDictionary updatedWord) {
-        return null;
+    public Optional<UserDictionary> getWordById(Long id) {
+        return this.userDictionaryRepository.findById(id);
     }
 }
