@@ -3,6 +3,7 @@ package com.maven.translationserverapp.rest;
 import com.maven.translationserverapp.dto.WordTranslationDTO;
 import com.maven.translationserverapp.model.UserDictionary;
 import com.maven.translationserverapp.security.jwt.JWTTokenProvider;
+import com.maven.translationserverapp.security.jwt.JWTUser;
 import com.maven.translationserverapp.service.interfaces.TranslationService;
 import com.maven.translationserverapp.service.interfaces.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -37,12 +39,23 @@ public class WordTranslationRESTController {
     @PostMapping("add-word")
     public ResponseEntity<?> addWord(@RequestBody WordTranslationDTO requestDto) {
         try {
-            System.out.println("requestDto" + requestDto + " ");
+//            System.out.println("requestDto" + requestDto + " ");
             UserDictionary word = new UserDictionary();
-            word.setUser(this.userService.findByUsername("qwer"));
+
             word.setDescription(requestDto.getDescription());
             word.setEnglishValue(requestDto.getEnd());
             word.setRussianValue(requestDto.getRus());
+            word.setLearningRating("0");
+//            word.setUserId();
+
+            Long userId = ((JWTUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+
+            word.setUser(userService.findById(userId));
+
+
+//            System.out.println(userId);
+            //            System.out.println(SecurityContextHolder.getContext().getAuthentication().get);
+
 
             this.translationService.addWord(word);
             return ResponseEntity.ok(200);

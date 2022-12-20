@@ -20,6 +20,8 @@ public class UserDictionary {
     private String learningRating;
     @Column(name = "description")
     private String description;
+    @Column(name = "user_id", insertable = false, updatable = false)
+    private Long userId;
 
     @ManyToOne
     private User user;
