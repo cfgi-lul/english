@@ -27,7 +27,8 @@ import {TaskListModule} from "./pages/tasks-list/task-list.module";
 import {TaskListRoutingModule} from "./pages/tasks-list/task-list-routing.module";
 import {LoginPageComponent} from './pages/login-page/login-page.component';
 import {CommonModule} from "@angular/common";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {AuthInterceptor} from "./auth/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -74,7 +75,11 @@ import {HttpClientModule} from "@angular/common/http";
     MatButtonModule,
     HttpClientModule
   ],
-  providers: [MatDrawerContainer, Overlay, MatSnackBar],
+  providers: [MatDrawerContainer, Overlay, MatSnackBar, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

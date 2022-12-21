@@ -5,7 +5,6 @@ import com.maven.translationserverapp.dto.UserDTO;
 import com.maven.translationserverapp.model.User;
 import com.maven.translationserverapp.security.jwt.JWTTokenProvider;
 import com.maven.translationserverapp.service.interfaces.UserService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +19,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @CrossOrigin("http://localhost:10050")
-@Slf4j
 @RestController
 @RequestMapping(value = "/api/auth/")
 public class AuthenticationRESTController {
@@ -78,9 +76,7 @@ public class AuthenticationRESTController {
             this.userService.register(user);
             return ResponseEntity.ok(200);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                                              "User with this username or email already exist"
-            );
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with this username or email already exist");
         }
     }
 }

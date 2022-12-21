@@ -14,6 +14,10 @@ const routes: Routes = [
     path: 'tasks',
     loadChildren: () => import('./pages/tasks-list/task-list-routing.module').then(m => m.TaskListRoutingModule)
   },
+  {
+    path: 'manipulations',
+    loadChildren: () => import('./pages/words-manipulations/words-manipulations-routing.module').then(m => m.WordsManipulationsRoutingModule)
+  },
   {path: '**', redirectTo: '/404'},
 
 ];

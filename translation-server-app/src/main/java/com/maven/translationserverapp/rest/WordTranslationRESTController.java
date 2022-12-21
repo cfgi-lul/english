@@ -5,7 +5,6 @@ import com.maven.translationserverapp.model.UserDictionary;
 import com.maven.translationserverapp.security.jwt.JWTUser;
 import com.maven.translationserverapp.service.interfaces.TranslationService;
 import com.maven.translationserverapp.service.interfaces.UserService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 @CrossOrigin("http://localhost:10050")
-@Slf4j
 @RestController
 @RequestMapping(value = "/api/dictionary/")
 public class WordTranslationRESTController {
@@ -34,10 +32,11 @@ public class WordTranslationRESTController {
 
     @PostMapping("add-word")
     public ResponseEntity<?> addWord(@RequestBody WordTranslationDTO requestDto) {
+        System.out.println(123123);
         try {
             UserDictionary word = new UserDictionary();
             word.setDescription(requestDto.getDescription());
-            word.setEnglishValue(requestDto.getEnd());
+            word.setEnglishValue(requestDto.getEng());
             word.setRussianValue(requestDto.getRus());
             word.setLearningRating("0");
             Long userId = ((JWTUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();

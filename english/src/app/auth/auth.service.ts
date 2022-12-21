@@ -12,6 +12,20 @@ export class AuthService {
   constructor(private httpClient: HttpClient) {
   }
 
+  public getToken(): string {
+    let token;
+    try {
+      token = localStorage.getItem('token');
+    } catch (e) {
+      console.log("no auth token");
+    }
+    return token ? token : "";
+  }
+
+  public refreshAuthToken(): Observable<{ token: string, username: string }> {
+    return new Observable<{token: string; username: string}>();
+  }
+
   public login(data: { username: string; password: string; }): Observable<{ token: string, username: string }> {
     return this.httpClient.post<{ token: string, username: string }>("http://localhost:10051/api/auth/login", data)
       .pipe(tap(e => localStorage.setItem('token', e.token)));
