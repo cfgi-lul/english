@@ -29,6 +29,9 @@ import {LoginPageComponent} from './pages/login-page/login-page.component';
 import {CommonModule} from "@angular/common";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./auth/auth.interceptor";
+import {WordsManipulationsModule} from "./pages/words-manipulations/words-manipulations.module";
+import {WordsManipulationsRoutingModule} from "./pages/words-manipulations/words-manipulations-routing.module";
+import {AddWordComponent} from "./pages/words-manipulations/manipulations/add-word/add-word.component";
 
 @NgModule({
   declarations: [
@@ -64,11 +67,14 @@ import {AuthInterceptor} from "./auth/auth.interceptor";
     MatInputModule,
     ReactiveFormsModule,
     TaskListModule,
-    TaskListRoutingModule
+    TaskListRoutingModule,
+    WordsManipulationsModule,
+    WordsManipulationsRoutingModule
   ],
   exports: [
     CommonModule,
     TaskListRoutingModule,
+    WordsManipulationsRoutingModule,
     MatInputModule,
     MatSelectModule,
     FormsModule,
