@@ -31,7 +31,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./auth/auth.interceptor";
 import {WordsManipulationsModule} from "./pages/words-manipulations/words-manipulations.module";
 import {WordsManipulationsRoutingModule} from "./pages/words-manipulations/words-manipulations-routing.module";
-import {AddWordComponent} from "./pages/words-manipulations/manipulations/add-word/add-word.component";
 
 @NgModule({
   declarations: [

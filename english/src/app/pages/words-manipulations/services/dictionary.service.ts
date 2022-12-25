@@ -19,5 +19,9 @@ export class DictionaryService {
     return this.httpClient.delete<any>("http://localhost:10051/api/dictionary/delete-word", {body: data});
   }
 
+  public getWords(): Observable<Array<{ russianValue: string; englishValue: string; description: string; }>> {
+    return this.httpClient.get<any>("http://localhost:10051/api/dictionary/get-words");
+  }
+
 }
 

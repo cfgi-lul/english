@@ -16,7 +16,6 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log(request, next);
     if (!(request.url.includes('api/auth/login') || request.url.includes('api/auth/register'))) {
       return next.handle(this.addAuthToken(request)).pipe(
         catchError((requestError: HttpErrorResponse) => {

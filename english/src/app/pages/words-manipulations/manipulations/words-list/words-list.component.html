@@ -1,1 +1,15 @@
-<p>words-list works!</p>
+<div class="wrapper" *ngIf="!(loading$ | async)">
+  <table [dataSource]="dataSource" class="mat-elevation-z8 demo-table" mat-table>
+    <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+      <th *matHeaderCellDef mat-header-cell>
+        {{column.header}}
+      </th>
+      <td *matCellDef="let row" mat-cell>
+        {{column.cell(row)}}
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  </table>
+</div>
