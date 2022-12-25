@@ -55,13 +55,14 @@ public class AuthenticationRESTController {
             response.put("token", token);
 
             return ResponseEntity.ok(response);
-        } catch (AuthenticationException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid password or username");
+        } catch (AuthenticationException error) {
+            throw error;
         }
     }
 
-    @RequestMapping(value = "register", method = RequestMethod.POST)
-    public ResponseEntity<?> saveUser(@RequestBody UserDTO userDTO) {
+    @PostMapping("register")
+    @ResponseStatus(value = HttpStatus.OK)
+    public void saveUser(@RequestBody UserDTO userDTO) {
         try {
             if (this.userService.findByUsername(userDTO.getUsername()) != null || this.userService.findByEmail(
                     userDTO.getEmail()) != null) {
@@ -74,7 +75,6 @@ public class AuthenticationRESTController {
             user.setUsername(userDTO.getUsername());
             user.setFirstName(userDTO.getFirstName());
             this.userService.register(user);
-            return ResponseEntity.ok(200);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with this username or email already exist");
         }

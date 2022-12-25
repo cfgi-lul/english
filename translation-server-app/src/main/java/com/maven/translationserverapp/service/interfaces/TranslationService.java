@@ -2,6 +2,7 @@ package com.maven.translationserverapp.service.interfaces;
 
 import com.maven.translationserverapp.model.UserDictionary;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface TranslationService {
@@ -11,9 +12,9 @@ public interface TranslationService {
 
     UserDictionary deleteWordById(Long id);
 
-    UserDictionary[] getWords();
+    List<UserDictionary> getWords(Long userId);
 
     UserDictionary updateWord(UserDictionary updatedWord);
 
-    Optional<UserDictionary> getWordById(Long id);
+    UserDictionary getWordById(Long id);
 }

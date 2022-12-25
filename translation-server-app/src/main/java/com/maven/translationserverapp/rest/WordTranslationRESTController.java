@@ -13,8 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @CrossOrigin("http://localhost:10050")
 @RestController
@@ -31,8 +31,8 @@ public class WordTranslationRESTController {
     }
 
     @PostMapping("add-word")
-    public ResponseEntity<?> addWord(@RequestBody WordTranslationDTO requestDto) {
-        System.out.println(123123);
+    @ResponseStatus(value = HttpStatus.OK)
+    public void addWord(@RequestBody WordTranslationDTO requestDto) {
         try {
             UserDictionary word = new UserDictionary();
             word.setDescription(requestDto.getDescription());
@@ -43,25 +43,48 @@ public class WordTranslationRESTController {
             word.setUserId(userId);
             word.setUser(userService.findById(userId));
             this.translationService.addWord(word);
-            return ResponseEntity.ok(200);
         } catch (AuthenticationException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Word already exist");
         }
     }
 
     @DeleteMapping("delete-word")
-    public ResponseEntity<?> addWord(@RequestBody Long id) {
+    @ResponseStatus(value = HttpStatus.OK)
+    public void deleteWord(@RequestBody Long id) {
         Long userId = ((JWTUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
         userService.findById(userId);
 
-        Optional<UserDictionary> word = this.translationService.getWordById(id);
-        if (!word.isPresent()) {
+        UserDictionary word = this.translationService.getWordById(id);
+        if (word == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No such word to delete");
         }
-        if (!Objects.equals(userId, word.get().getUserId())) {
+        if (!Objects.equals(userId, word.getUserId())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You cannot delete someone else's word");
         }
         this.translationService.deleteWordById(id);
-        return ResponseEntity.ok(200);
+    }
+
+    @GetMapping("get-word")
+    public ResponseEntity<UserDictionary> getWord(@RequestBody Long id) {
+        Long userId = ((JWTUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        UserDictionary word = this.translationService.getWordById(id);
+
+        if (word == null || Objects.equals(word.getUserId(), userId)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No such word to get");
+        }
+        return ResponseEntity.ok(word);
+    }
+
+    @GetMapping("get-words")
+    public ResponseEntity<List<UserDictionary>> getWords() {
+        try {
+            Long userId = ((JWTUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+
+            List<UserDictionary> words = this.translationService.getWords(userId);
+
+            return ResponseEntity.ok(words);
+        } catch (Error error) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Some shit happened");
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.maven.translationserverapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -24,5 +25,6 @@ public class UserDictionary {
     private Long userId;
 
     @ManyToOne
+    @JsonBackReference
     private User user;
 }

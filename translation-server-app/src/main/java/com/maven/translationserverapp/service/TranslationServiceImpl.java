@@ -1,5 +1,6 @@
 package com.maven.translationserverapp.service;
 
+import com.maven.translationserverapp.model.User;
 import com.maven.translationserverapp.model.UserDictionary;
 import com.maven.translationserverapp.repository.UserDictionaryRepository;
 import com.maven.translationserverapp.repository.UserRepository;
@@ -8,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Optional;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -38,17 +39,37 @@ public class TranslationServiceImpl implements TranslationService {
     }
 
     @Override
-    public UserDictionary[] getWords() {
-        return new UserDictionary[0];
+    public List<UserDictionary> getWords(Long userId) {
+        User user = this.userRepository.findById(userId).orElse(null);
+        if (user == null) {
+            return null;
+        }
+
+        return user.getDictionaries();
     }
 
     @Override
     public UserDictionary updateWord(UserDictionary updatedWord) {
-        return null;
+        UserDictionary wordToUpdate = this.userDictionaryRepository.findById(updatedWord.getId()).orElse(null);
+        if (wordToUpdate == null) {
+            return null;
+        }
+        wordToUpdate.setDescription(updatedWord.getDescription());
+        wordToUpdate.setLearningRating(updatedWord.getLearningRating());
+        wordToUpdate.setEnglishValue(updatedWord.getEnglishValue());
+        wordToUpdate.setRussianValue(updatedWord.getRussianValue());
+
+        return this.userDictionaryRepository.save(wordToUpdate);
     }
 
     @Override
-    public Optional<UserDictionary> getWordById(Long id) {
-        return this.userDictionaryRepository.findById(id);
+    public UserDictionary getWordById(Long id) {
+        UserDictionary result = this.userDictionaryRepository.findById(id).orElse(null);
+
+        if (result == null) {
+            return null;
+        }
+
+        return result;
     }
 }
