@@ -37,7 +37,7 @@ public class JWTTokenProvider {
         secret = Base64.getEncoder().encodeToString(secret.getBytes());
     }
 
-    public String createToken(String username) {
+    public String createToken(String username) { // метод создания токена
 
         Claims claims = Jwts.claims().setSubject(username);
 
@@ -57,11 +57,11 @@ public class JWTTokenProvider {
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
-    public String getUsername(String token) {
+    public String getUsername(String token) { // получаем имя пользователя
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();
     }
 
-    public String resolveToken(HttpServletRequest req) {
+    public String resolveToken(HttpServletRequest req) { // обрабатываем токен
         String bearerToken = req.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer_")) {
             return bearerToken.substring(7, bearerToken.length());
@@ -69,7 +69,7 @@ public class JWTTokenProvider {
         return null;
     }
 
-    public boolean validateToken(String token) {
+    public boolean validateToken(String token) { // валидируем токен
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
 

@@ -11,6 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+// провряем токен на валидность
 public class JWTTokenFilter extends GenericFilterBean {
     private JWTTokenProvider jwtTokenProvider;
 

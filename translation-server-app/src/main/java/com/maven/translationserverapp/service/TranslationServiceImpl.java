@@ -17,14 +17,14 @@ public class TranslationServiceImpl implements TranslationService {
     private final UserRepository userRepository;
     private final UserDictionaryRepository userDictionaryRepository;
 
-    public TranslationServiceImpl(UserRepository userRepository, UserDictionaryRepository userDictionaryRepository) {
+    public TranslationServiceImpl(UserRepository userRepository, UserDictionaryRepository userDictionaryRepository) { // конструктор класса
         this.userRepository = userRepository;
         this.userDictionaryRepository = userDictionaryRepository;
     }
 
     @Override
-    public UserDictionary addWord(UserDictionary word) {
-        return this.userDictionaryRepository.save(word);
+    public UserDictionary addWord(UserDictionary word) { // метод addWord принимает UserDictionary, возвращает UserDictionary
+        return this.userDictionaryRepository.save(word); // сохраняем в БД передаваемое значение
     }
 
     @Override
@@ -33,8 +33,8 @@ public class TranslationServiceImpl implements TranslationService {
     }
 
     @Override
-    public UserDictionary deleteWordById(Long id) {
-        this.userDictionaryRepository.deleteById(id);
+    public UserDictionary deleteWordById(Long id) { // метод deleteWordById принимает Long, возращает UserDictionary
+        this.userDictionaryRepository.deleteById(id); // ужаляем запись из базы по id
         return null;
     }
 
@@ -63,6 +63,7 @@ public class TranslationServiceImpl implements TranslationService {
     }
 
     @Override
+    // Optional<UserDictionary> значит может быть, а может не быть. Параметр в <> опционален
     public UserDictionary getWordById(Long id) {
         UserDictionary result = this.userDictionaryRepository.findById(id).orElse(null);
 
@@ -70,6 +71,6 @@ public class TranslationServiceImpl implements TranslationService {
             return null;
         }
 
-        return result;
+        return result; // пытаемся найти запись по id
     }
 }

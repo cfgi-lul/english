@@ -14,21 +14,23 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-@EnableWebSecurity
-@Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private static final String AUTH_ENDPOINT = "/api/auth/**";
-    private static final String DICTIONARY_ENDPOINT = "/api/dictionary";
-    private final JWTTokenProvider jwtTokenProvider;
+// Куда пускаем или не пускаем не авторизованных пользователей
 
-    @Autowired
-    public SecurityConfig(JWTTokenProvider jwtTokenProvider) {
+@EnableWebSecurity
+@Configuration // пометить класс как конфигурацию
+public class SecurityConfig extends WebSecurityConfigurerAdapter { // SecurityConfig расширяет класс WebSecurityConfigurerAdapter
+    private static final String AUTH_ENDPOINT = "/api/auth/**"; // путь до рест-контроллера
+    private static final String DICTIONARY_ENDPOINT = "/api/dictionary"; // путь до другого рест-контроллера
+    private final JWTTokenProvider jwtTokenProvider; // класс работает с jwt Token
+
+    @Autowired // внедрение зависимостей
+    public SecurityConfig(JWTTokenProvider jwtTokenProvider) { // конструктор класса
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
     @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
+    @Override // переопределение метода родительского коасса
+    public AuthenticationManager authenticationManagerBean() throws Exception { // метод, который возвращает authenticationManagerBean из родителя WebSecurityConfigurerAdapter
         return super.authenticationManagerBean();
     }
 
@@ -42,17 +44,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .cors()
+                .cors() // cors
                 .and()
                 .httpBasic().disable()
                 .csrf().disable()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests().antMatchers(AUTH_ENDPOINT).permitAll()
-                .antMatchers(DICTIONARY_ENDPOINT).hasAnyRole()
-                .anyRequest().authenticated()
+                .authorizeRequests().antMatchers(AUTH_ENDPOINT).permitAll()// по пути AUTH_ENDPOINT разрешаем ходить всем
+                .antMatchers(DICTIONARY_ENDPOINT).hasAnyRole()// по адресу DICTIONARY_ENDPOINT разрешаем ходить только пользовтаелям с ролью
+                .anyRequest().authenticated()// для всех остальных адресов нужна аутентификация
                 .and()
-                .apply(new JWTConfigurer(jwtTokenProvider));
+                .apply(new JWTConfigurer(jwtTokenProvider));// работаем с jwt Token
     }
 }

@@ -5,6 +5,7 @@ import com.maven.translationserverapp.model.UserDictionary;
 import java.util.List;
 import java.util.Optional;
 
+// интерфейс, который описывает какие методы нужно реализовать
 public interface TranslationService {
     UserDictionary addWord(UserDictionary word);
 

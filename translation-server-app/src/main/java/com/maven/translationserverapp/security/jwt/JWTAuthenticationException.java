@@ -1,5 +1,6 @@
 package com.maven.translationserverapp.security.jwt;
 
+// ошибка аутентификации
 
 import org.springframework.security.core.AuthenticationException;
 

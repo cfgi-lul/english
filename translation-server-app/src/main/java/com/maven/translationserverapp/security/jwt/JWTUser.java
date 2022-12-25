@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+// модель JWT пользователя
 public class JWTUser implements UserDetails {
     private final Long id;
     private final String username;

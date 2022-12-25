@@ -6,6 +6,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.ArrayList;
 import java.util.Collections;
 
+
+// создание новых JWT пользователей (фабрика)
 public final class JWTUserFactory {
     public JWTUserFactory() {
     }
