@@ -18,6 +18,8 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.HashMap;
 import java.util.Map;
 
+// Контроллер для регистрации и авторизации пользователей
+
 @CrossOrigin("http://localhost:10050") // с какого адреса можно делать запросы на этот контроллер
 @RestController // контроллер не должен отдавать html страницы
 @RequestMapping(value = "/api/auth/") // путь до контроллера
@@ -60,9 +62,9 @@ public class AuthenticationRESTController {
         }
     }
 
-    @PostMapping("register")
-    @ResponseStatus(value = HttpStatus.OK) // /api/auth/register путь до регистра. Это постзапрос
-    public void saveUser(@RequestBody UserDTO userDTO) { // метод возвращает ResponseEntity и принимает UserDTO
+    @PostMapping("register") // /api/auth/register путь до регистра. Это постзапрос
+    @ResponseStatus(value = HttpStatus.OK) // штука нужная для пустого ответа сервера на запрос
+    public void saveUser(@RequestBody UserDTO userDTO) { // метод ничего не возвращает и принимает UserDTO
         try {
             if (this.userService.findByUsername(userDTO.getUsername()) != null || this.userService.findByEmail(
                     userDTO.getEmail()) != null) { // проверяем есть ли в базе такой пользователь

@@ -39,38 +39,37 @@ public class TranslationServiceImpl implements TranslationService {
     }
 
     @Override
-    public List<UserDictionary> getWords(Long userId) {
-        User user = this.userRepository.findById(userId).orElse(null);
-        if (user == null) {
+    public List<UserDictionary> getWords(Long userId) { // метод для получения всех слов пользователя
+        User user = this.userRepository.findById(userId).orElse(null); //ищем пользователя
+        if (user == null) { // проверка что он существует в базе
             return null;
         }
 
-        return user.getDictionaries();
+        return user.getDictionaries(); // возаращение коллеции слов пользователя
     }
 
     @Override
-    public UserDictionary updateWord(UserDictionary updatedWord) {
-        UserDictionary wordToUpdate = this.userDictionaryRepository.findById(updatedWord.getId()).orElse(null);
-        if (wordToUpdate == null) {
+    public UserDictionary updateWord(UserDictionary updatedWord) { // Метод для обновления данных одной записи в табличке dictionaries
+        UserDictionary wordToUpdate = this.userDictionaryRepository.findById(updatedWord.getId()).orElse(null); // ищем исходное слово для его обновления
+        if (wordToUpdate == null) { // проверям что оно существует
             return null;
         }
-        wordToUpdate.setDescription(updatedWord.getDescription());
-        wordToUpdate.setLearningRating(updatedWord.getLearningRating());
-        wordToUpdate.setEnglishValue(updatedWord.getEnglishValue());
-        wordToUpdate.setRussianValue(updatedWord.getRussianValue());
+        wordToUpdate.setDescription(updatedWord.getDescription());// обновляем поля
+        wordToUpdate.setLearningRating(updatedWord.getLearningRating());// обновляем поля
+        wordToUpdate.setEnglishValue(updatedWord.getEnglishValue());// обновляем поля
+        wordToUpdate.setRussianValue(updatedWord.getRussianValue());// обновляем поля
 
-        return this.userDictionaryRepository.save(wordToUpdate);
+        return this.userDictionaryRepository.save(wordToUpdate);// сохраняем обновленное слово в базу
     }
 
     @Override
-    // Optional<UserDictionary> значит может быть, а может не быть. Параметр в <> опционален
-    public UserDictionary getWordById(Long id) {
-        UserDictionary result = this.userDictionaryRepository.findById(id).orElse(null);
+    public UserDictionary getWordById(Long id) {// медод для получения одного слова пользователя по id
+        UserDictionary result = this.userDictionaryRepository.findById(id).orElse(null); // ищем слово
 
-        if (result == null) {
+        if (result == null) {// проверяем, что оно существует
             return null;
         }
 
-        return result; // пытаемся найти запись по id
+        return result; // возаращаем найденное слово
     }
 }

@@ -24,14 +24,14 @@ public class WordTranslationRESTController {
     private final TranslationService translationService; // объявляем переменную
     private final UserService userService;
 
-    @Autowired
+    @Autowired // механизм внедренения завесимостей
     public WordTranslationRESTController(UserService userService, TranslationService translationService) { // конструктор класса
         this.userService = userService;
         this.translationService = translationService;
     }
 
     @PostMapping("add-word")// /api/dictionary/add-word . постзапрос
-    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseStatus(value = HttpStatus.OK) // штука нужная для пустого ответа сервера на запрос
     public void addWord(@RequestBody WordTranslationDTO requestDto) {
         try {
             UserDictionary word = new UserDictionary(); // создали переменную
@@ -50,10 +50,10 @@ public class WordTranslationRESTController {
     }
 
     @DeleteMapping("delete-word") // /api/dictionary/delete-word. делит запрос
-    @ResponseStatus(value = HttpStatus.OK)
-    public void deleteWord(@RequestBody Long id) { // метод addWord возвращает ResponseEntity, принимает Long
+    @ResponseStatus(value = HttpStatus.OK) // штука нужная для пустого ответа сервера на запрос
+    public void deleteWord(@RequestBody Long id) { // метод addWord возвращает ничего, принимает Long
         Long userId = ((JWTUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-        userService.findById(userId); // 54-55 проверяем, что запрос от авторизованного пользователя
+        userService.findById(userId); // проверяем, что запрос от авторизованного пользователя
 
         UserDictionary word = this.translationService.getWordById(id); // пытаемся получить word по id
         if (word == null) { // проверяем что word в БД чуществует
@@ -65,26 +65,26 @@ public class WordTranslationRESTController {
         this.translationService.deleteWordById(id); // если все ок, то удаляем word (запись) из БД
     }
 
-    @GetMapping("get-word")
-    public ResponseEntity<UserDictionary> getWord(@RequestBody Long id) {
-        Long userId = ((JWTUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-        UserDictionary word = this.translationService.getWordById(id);
+    @GetMapping("get-word")  // /api/dictionary/get-word. get запрос для получения одного слова по его id
+    public ResponseEntity<UserDictionary> getWord(@RequestBody Long id) { // метод принимает long id и возвращает ResponseEntity<UserDictionary>
+        Long userId = ((JWTUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId(); // проверяем, что запрос от авторизованного пользователя
+        UserDictionary word = this.translationService.getWordById(id); // проверяем, что запрос от авторизованного пользователя
 
-        if (word == null || Objects.equals(word.getUserId(), userId)) {
+        if (word == null || Objects.equals(word.getUserId(), userId)) { // выкидываем ошибку если такого слова нет у пользователя
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No such word to get");
         }
-        return ResponseEntity.ok(word);
+        return ResponseEntity.ok(word);// даем пользователю ответ
     }
 
-    @GetMapping("get-words")
-    public ResponseEntity<List<UserDictionary>> getWords() {
+    @GetMapping("get-words")// /api/dictionary/get-words . get запрос для получения всех слов пользователя
+    public ResponseEntity<List<UserDictionary>> getWords() {// метод не принимает ничего и возаращает ResponseEntity от коллекции слов пользователя
         try {
-            Long userId = ((JWTUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+            Long userId = ((JWTUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId(); // Получаем текущего пользователя из запроса
 
-            List<UserDictionary> words = this.translationService.getWords(userId);
+            List<UserDictionary> words = this.translationService.getWords(userId); // Находим все слова пользователя
 
-            return ResponseEntity.ok(words);
-        } catch (Error error) {
+            return ResponseEntity.ok(words); // Возвращаем пользователю коллекцию слов
+        } catch (Error error) { // Обработка ошибок
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Some shit happened");
         }
     }

@@ -25,6 +25,6 @@ public class UserDictionary {
     private Long userId;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonBackReference // нужно для того, чтобы рекурсивно не доставались обекты
     private User user;
 }
